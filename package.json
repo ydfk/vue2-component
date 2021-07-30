@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "prettier --write src && eslint --quiet --fix src --ext .ts,.js,.vue,.tsx,.jsx",
+    "lint:style": "stylelint src/**/*.{sass,vue,tsx}"
   },
   "dependencies": {
     "@vue/composition-api": "^1.0.4",
@@ -39,6 +40,12 @@
     "prettier": "^2.3.2",
     "sass": "^1.35.2",
     "sass-loader": "^8.0.2",
+    "stylelint": "^13.13.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-declaration-block-no-ignored-properties": "^2.4.0",
+    "stylelint-order": "^4.1.0",
     "terser-webpack-plugin": "4.2.3",
     "ts-import-plugin": "^1.6.7",
     "typescript": "^4.3.5",
@@ -48,6 +55,10 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
+    "*.{sass,vue,tsx}": [
+      "stylelint",
+      "git add"
+    ],
     "*.{js,jsx,vue,ts,tsx}": [
       "vue-cli-service lint",
       "git add"
